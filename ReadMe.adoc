@@ -1,0 +1,23 @@
+:toc:
+= Weld point calculator service
+
+This service provides a way to input a matrix to a service representing a Midland Steel rebar mesh, and be returned a matrix in response with the locations of all of the points on the mesh that need to be welded, in the form of their X, Y and Z coordinates.
+
+== How does the service work logically
+
+== get_crossing module
+
+    import get_crossing from get_crossing
+    get_crossing.get_crossing( _matrix with endpoints(x and y) of bars_ <Array> )
+
+A simple use case into the get_crossing middleware would look something like this:
+
+    endpoints_bar_1 = [[1, 0], [1, 11]]
+    endpoints_bar_2 = [[0,9], [5, 9]]
+    get_crossing([endpoints_bar_1, endpoints_bar_2])
+
+This will then return an array with two values that represent the x and y values of the intersection of the bars.
+
+== get_z_value
+
+Before the matrix of values is returned to the caller, the z value is appended to all of the arrays containing the x and y coordinates of the intersection of the bars. This is appended, and not calculated, as the position for all welds in z space is constant.
